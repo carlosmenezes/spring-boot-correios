@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h2>Olá mundo com Spring MVC!</h2>
+<h2>Todos os pacotes</h2>
+<ul>
+    <li th:each="package : ${packages}">
+        <p th:text="${package.code}"></p>
+
+        <p th:text="${package.description}"></p>
+    </li>
+</ul>
 </body>
 </html>
