@@ -1,6 +1,7 @@
 package com.fireball.springbootcorreios.controllers
 
 import com.fireball.springbootcorreios.repositories.PackageRepository
+import com.fireball.springbootcorreios.services.PostalServiceQueryService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,10 +20,21 @@ class PackagesController {
     @Autowired
     PackageRepository packageRepository
 
+    @Autowired
+    PostalServiceQueryService postalServiceQueryService
+
     @RequestMapping("/")
     def index() {
 
         def allPackages = packageRepository.findAll()
+
+        allPackages.each {
+            if (!it.delivered()) {
+                logger.info("Package [{}] not delivered, retrieving info from postal service", it.code);
+                postalServiceQueryService.updateStatus(it)
+            }
+        }
+
         def modelAndView = new ModelAndView()
 
         modelAndView.addObject("packages", allPackages)
