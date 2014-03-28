@@ -7,6 +7,7 @@ import com.fireball.springbootcorreios.external.resources.PostalServiceHistory
  */
 public interface PostalServiceApi {
 
+//    @Requestli
     PostalServiceHistory getHistory(PostalServiceRequest request)
 
 }
