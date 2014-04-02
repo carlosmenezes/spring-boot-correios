@@ -15,3 +15,8 @@ build
 *.ipr
 *.iws
 
+/bin
+
+.classpath
+.project
+.settings
